@@ -13,6 +13,8 @@ public class Meteor : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        Invoke("DestroySelf",2f);
+
     }
 
     // Update is called once per frame
@@ -55,5 +57,9 @@ public class Meteor : MonoBehaviour
         if (!collision.gameObject.CompareTag("Meteor"))
             Destroy(this.gameObject);
 
+    }
+    void DestroySelf()
+    { 
+        Destroy(this.gameObject);
     }
 }

@@ -29,16 +29,16 @@ public class UIManager : MonoBehaviour
         switch (MeteorController.instance.weatherType)
         {
             case WeatherType.EastWind:
-                weatherText.text = "东风!";
-                windForce.text = "风力：" + meteorInstance.forceMagnitudeRight;
+                weatherText.text = "East Wind!";
+                windForce.text = "Wind Power：" + meteorInstance.forceMagnitudeRight;
                 break;
             case WeatherType.WestWind:
-                weatherText.text = "西风!";
-                windForce.text = "风力：" + meteorInstance.forceMagnitudeLeft;
+                weatherText.text = "West Wind!";
+                windForce.text = "Wind Power：" + meteorInstance.forceMagnitudeLeft;
                 break;
             case WeatherType.StraightWind:
-                weatherText.text = "垂直风!";
-                windForce.text = "风力：" + meteorInstance.forceMagnitudeDown;
+                weatherText.text = "Straight Wind!";
+                windForce.text = "Wind Power：" + meteorInstance.forceMagnitudeDown;
                 break;
         }
         switch (GameManager.instance.gameState)
@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
                 meteorTurn.SetActive(true);
                 if (!coroutineStarted)
                 {
-                    StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.playerbuilding, 2f));
+                    StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.playerbuilding, MeteorController.instance.levelTime/2));
                     coroutineStarted = true;
                 }
 
@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
             switch (GameManager.instance.gameState)
             {
                 case GameState.playerbuilding:
-                    MeteorController.instance.SpawnMeteorAtRandom();
+                    StartCoroutine(MeteorController.instance.SpawnMeteorAtRandom(MeteorController.instance.spawnInterval));
                     StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.meteorfalling,0f));
                     coroutineStarted = false;
                     break;
@@ -84,8 +84,8 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator WaitForClick()
     {
-        yield return new WaitForSeconds(2f);
-        // 两秒后重新启用按钮点击
+        yield return new WaitForSeconds(MeteorController.instance.levelTime/2);
+        // N秒后重新启用按钮点击
         canClick = true;
     }
 

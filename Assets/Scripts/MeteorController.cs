@@ -14,11 +14,17 @@ public class MeteorController : MonoBehaviour
 {
     static public MeteorController instance;
     public GameObject meteor;
+    public GameObject bigMeteor;
     public Vector2 center;
     public Vector2 size;
     public WeatherType weatherType;
     private bool hasChangedWeather = false;
-    int numberOfSpawns = 30;
+    int numberOfSpawns = 300;  //数量
+    public int levelTime = 5; //持续时间
+    public float spawnInterval;  //生成间隔
+    public int numberOfVariantSpawn = 20; //圆形数量
+    public int variantNum = 0;
+    public int normalNum = 0;
     private void Awake()
     {
         //Singleton
@@ -31,6 +37,10 @@ public class MeteorController : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        spawnInterval = levelTime / numberOfSpawns;
     }
     private void Update()
     {
@@ -55,21 +65,44 @@ public class MeteorController : MonoBehaviour
         Vector2 pos = center + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
         Instantiate(meteor, pos, Quaternion.identity);
     }
-
-    public void SpawnMeteorAtRandom()
+    /// <summary>
+    /// 正式生成方法
+    /// </summary>
+    /// <param name="spawnInterval"></param>
+    /// <returns></returns>
+    public IEnumerator SpawnMeteorAtRandom(float spawnInterval)
     {
         weatherType = (WeatherType)Random.Range(0, 3);
         for (int i = 0; i < numberOfSpawns; i++)
         {
+
             Vector2 pos = center + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
-            Instantiate(meteor, pos, Quaternion.identity);
+            if (Random.Range(0, 100) < numberOfVariantSpawn * 100 / numberOfSpawns)
+            {
+                Instantiate(bigMeteor, pos, Quaternion.identity);
+                variantNum++;
+            }
+            else
+            {
+                Instantiate(meteor, pos, Quaternion.identity);
+                normalNum++;
+            }
+            
+            yield return new WaitForSeconds(spawnInterval);
         }
-        
+        Debug.Log($"变体数量:{variantNum}");
+        Debug.Log($"正常数量:{normalNum}");
+
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(center, size);
+    }
+    public void ClearNumCount()
+    { 
+        variantNum = 0;
+        normalNum = 0;
     }
 
 }

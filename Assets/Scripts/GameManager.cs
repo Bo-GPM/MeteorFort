@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
 
         // 切换到指定的状态
         gameState = nextState;
+        MeteorController.instance.ClearNumCount();
 
         // 在控制台输出当前状态
         Debug.Log("Switched to " + nextState);
