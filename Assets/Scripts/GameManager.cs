@@ -124,18 +124,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                currentGold -= tempBlock.GetComponent<BlockController>().getCost();
-                Instantiate(buildingBlockList[activeBuidling], mousePosition, tempBlock.transform.rotation);
-                Destroy(tempBlock);
-                isBuildingActive = false;
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                Destroy(tempBlock);
-                isBuildingActive = false;
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    currentGold -= tempBlock.GetComponent<BlockController>().getCost();
+            //    Instantiate(buildingBlockList[activeBuidling], mousePosition, tempBlock.transform.rotation);
+            //    Destroy(tempBlock);
+            //    isBuildingActive = false;
+            //}
+            //else if (Input.GetMouseButtonDown(1))
+            //{
+            //    Destroy(tempBlock);
+            //    isBuildingActive = false;
+            //}
             
         }
     }

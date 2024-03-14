@@ -20,13 +20,15 @@ public class MeteorController : MonoBehaviour
     public WeatherType weatherType;
     private bool hasChangedWeather = false;
     int numberOfSpawns = 300;  //数量
-    public int levelTime = 5; //持续时间
-    public float spawnInterval;  //生成间隔
+    public float levelTime = 5f; //持续时间
+    [HideInInspector]public float spawnInterval;  //生成间隔
     public int numberOfVariantSpawn = 20; //圆形数量
     public int variantNum = 0;
     public int normalNum = 0;
     private void Awake()
     {
+      
+        Debug.Log(spawnInterval);
         //Singleton
         if (instance == null)
         {
@@ -72,6 +74,7 @@ public class MeteorController : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SpawnMeteorAtRandom(float spawnInterval)
     {
+        Debug.Log(spawnInterval);
         weatherType = (WeatherType)Random.Range(0, 3);
         for (int i = 0; i < numberOfSpawns; i++)
         {
