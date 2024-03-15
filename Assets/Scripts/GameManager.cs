@@ -74,7 +74,10 @@ public class GameManager : MonoBehaviour
             // 4. Place Block if player pressed left mouse button OR cancel building
             updateMousePos();
             updateTempBlockPosAndRot();
-            placeBlock();
+            if (isBuildingActive)
+            {
+                placeBlock();
+            }
         }
     }
     public IEnumerator SwitchStateAfterDelay(GameState nextState,float delayTime)
@@ -117,26 +120,25 @@ public class GameManager : MonoBehaviour
 
     private void placeBlock()
     {
-        // Check if the Area is valid first, then place it.
-        if (mousePosition.y < forbitHeight)
+        if (Input.GetMouseButtonDown(0))
         {
-            // TODO: tell player this is too low to build
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            if (mousePosition.y < forbitHeight)
+            {
+                // TODO: tell player this is too low to build
+                Debug.LogWarning("Building distance is too low");
+            }
+            else
             {
                 currentGold -= tempBlock.GetComponent<BlockController>().getCost();
                 Instantiate(buildingBlockList[activeBuidling], mousePosition, tempBlock.transform.rotation);
                 Destroy(tempBlock);
                 isBuildingActive = false;
             }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                Destroy(tempBlock);
-                isBuildingActive = false;
-            }
-
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            Destroy(tempBlock);
+            isBuildingActive = false;
         }
     }
 
@@ -146,6 +148,7 @@ public class GameManager : MonoBehaviour
         if (buildingBlockList[blockIndex].GetComponent<BlockController>().getCost() >= currentGold) 
         {
             // TODO: tell player they have insufficient funds
+            Debug.LogWarning("Insufficient Funds!");
         }
         else
         {
