@@ -8,6 +8,7 @@ public class Meteor : MonoBehaviour
     [SerializeField][Range(0f, 0.8f)] public float forceMagnitudeLeft = 0.2f;
     [SerializeField] public float forceMagnitudeDown = 50f;
     [SerializeField] float maxSpeed = 50f;
+    [SerializeField] MeteorController meteorController;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class Meteor : MonoBehaviour
     {
         if (rb.velocity.magnitude < maxSpeed)
         {
-            switch (MeteorController.instance.weatherType)
+            switch (meteorController.weatherType)
             {
                 case WeatherType.EastWind:
                     //Debug.Log("东风!");

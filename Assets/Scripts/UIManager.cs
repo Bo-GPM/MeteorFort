@@ -15,7 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject meteorTurn;
     private bool canClick = true;
     private bool coroutineStarted = false;
-
+    [Header("---Meteor Controller---")]
+    [SerializeField] MeteorController frontController;
+    [SerializeField] MeteorController middleController;
+    [SerializeField] MeteorController backController;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
 
-        switch (MeteorController.instance.weatherType)
+        switch (middleController.weatherType)
         {
             case WeatherType.EastWind:
                 weatherText.text = "East Wind!";
@@ -52,7 +55,8 @@ public class UIManager : MonoBehaviour
                 meteorTurn.SetActive(true);
                 if (!coroutineStarted)
                 {
-                    StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.playerbuilding, MeteorController.instance.levelTime/2));
+                    //这里要比较 严谨点的话
+                    StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.playerbuilding, middleController.levelTime));
                     coroutineStarted = true;
                 }
 
@@ -70,7 +74,9 @@ public class UIManager : MonoBehaviour
             switch (GameManager.instance.gameState)
             {
                 case GameState.playerbuilding:
-                    StartCoroutine(MeteorController.instance.SpawnMeteorAtRandom(MeteorController.instance.spawnInterval));
+                    StartCoroutine(frontController.SpawnMeteorAtRandom(frontController.spawnInterval));
+                    StartCoroutine(middleController.SpawnMeteorAtRandom(middleController.spawnInterval));
+                    StartCoroutine(backController.SpawnMeteorAtRandom(backController.spawnInterval));
                     StartCoroutine(GameManager.instance.SwitchStateAfterDelay(GameState.meteorfalling,0f));
                     coroutineStarted = false;
                     break;
@@ -84,7 +90,8 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator WaitForClick()
     {
-        yield return new WaitForSeconds(MeteorController.instance.levelTime/2);
+        //这里要比较 严谨点的话
+        yield return new WaitForSeconds(middleController.levelTime);
         // N秒后重新启用按钮点击
         canClick = true;
     }

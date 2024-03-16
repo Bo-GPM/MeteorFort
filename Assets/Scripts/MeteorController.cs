@@ -12,34 +12,19 @@ public enum WeatherType
 
 public class MeteorController : MonoBehaviour
 {
-    static public MeteorController instance;
+    //static public MeteorController instance;
     public GameObject meteor;
     public GameObject bigMeteor;
-    public Vector2 center;
-    public Vector2 size;
+    public Vector3 center;
+    public Vector3 size;
     public WeatherType weatherType;
     private bool hasChangedWeather = false;
-    int numberOfSpawns = 300;  //数量
+    [SerializeField]int numberOfSpawns = 300;  //数量
     public float levelTime = 5f; //持续时间
     [HideInInspector]public float spawnInterval;  //生成间隔
     public int numberOfVariantSpawn = 20; //圆形数量
     public int variantNum = 0;
     public int normalNum = 0;
-    private void Awake()
-    {
-      
-        Debug.Log(spawnInterval);
-        //Singleton
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
     private void Start()
     {
         spawnInterval = levelTime / numberOfSpawns;
@@ -64,7 +49,7 @@ public class MeteorController : MonoBehaviour
     }
     void SpawnMeteorAtRandomTest()
     {
-        Vector2 pos = center + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
+        Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
         Instantiate(meteor, pos, Quaternion.identity);
     }
     /// <summary>
@@ -79,7 +64,7 @@ public class MeteorController : MonoBehaviour
         for (int i = 0; i < numberOfSpawns; i++)
         {
 
-            Vector2 pos = center + new Vector2(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2));
+            Vector3 pos = center + new Vector3(Random.Range(-size.x / 2, size.x / 2), Random.Range(-size.y / 2, size.y / 2), Random.Range(-size.z / 2, size.z / 2));
             if (Random.Range(0, 100) < numberOfVariantSpawn * 100 / numberOfSpawns)
             {
                 Instantiate(bigMeteor, pos, Quaternion.identity);

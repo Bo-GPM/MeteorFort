@@ -175,3 +175,4 @@ MonoBehaviour:
   forceMagnitudeLeft: 0.2
   forceMagnitudeDown: 50
   maxSpeed: 50
+  meteorController: {fileID: 1331718253204157053, guid: d11df954d67da6e47907c89254ac6a4a, type: 3}

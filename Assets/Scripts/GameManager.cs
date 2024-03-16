@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
 
     [Header(" -- UI Related -- ")] 
     [SerializeField] private Text GoldText;
-    
+
+    [Header(" -- Meteor Related -- ")]
+    [SerializeField] MeteorController[] meteorControllers;
+
     private int activeBuidling;
     private bool isBuildingActive = false;
     private Vector2 mousePosition;
@@ -47,6 +50,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+        meteorControllers = FindObjectsOfType<MeteorController>();
     }
     // Start is called before the first frame update
     void Start()
@@ -87,10 +91,13 @@ public class GameManager : MonoBehaviour
 
         // 切换到指定的状态
         gameState = nextState;
-        MeteorController.instance.ClearNumCount();
+        foreach (MeteorController meteorController in meteorControllers)
+        {
+            meteorController.ClearNumCount();
+        }
 
-        // 在控制台输出当前状态
-        Debug.Log("Switched to " + nextState);
+            // 在控制台输出当前状态
+            Debug.Log("Switched to " + nextState);
     }
 
     private void UpdateUI()
