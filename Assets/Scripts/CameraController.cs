@@ -12,11 +12,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] float minSize;
     [SerializeField] float maxSize;
     [SerializeField] float zoomStep;
+    [SerializeField] [Range(0, 0.02f)] private float cameraPanningSpeed = 0.03f;
     float cameraSize;
     private void Awake()
     {
         originialPosition = transform.position;
-        originalSize = cam.orthographicSize;
+        originalSize = cam.fieldOfView;
         cameraSize = originalSize;
     }
 
@@ -44,14 +45,17 @@ public class CameraController : MonoBehaviour
         }
         if (dragPanMoveActive)
         {
+            // Adjust panning speed based on FOV. Change cameraPanningSpeed to make it feels right :)
             Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - lastMousePos;
-            moveDir.x = mouseMovementDelta.x * 0.1f;
-            moveDir.y = mouseMovementDelta.y * 0.1f;
+            float panningSpeedFactor = cam.fieldOfView / cameraSize;
+            moveDir = new Vector3(-mouseMovementDelta.x * panningSpeedFactor, -mouseMovementDelta.y * panningSpeedFactor, 0) * cameraPanningSpeed;
+            transform.Translate(moveDir, Space.World);
+            
             lastMousePos = Input.mousePosition;
 
         }
         float moveSpeed = 50f;
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
+        transform.position += moveDir * (moveSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.Space))
         {
             transform.position = originialPosition;
@@ -70,7 +74,7 @@ public class CameraController : MonoBehaviour
             cameraSize -= zoomStep;
         }
         cameraSize = Mathf.Clamp(cameraSize, minSize, maxSize);
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, cameraSize, 10 * Time.deltaTime);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, cameraSize, 10 * Time.deltaTime);
 
     }
 }
