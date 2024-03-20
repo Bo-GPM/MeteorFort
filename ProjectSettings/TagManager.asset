@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BuildingBlock
   - Meteor
+  - Factory
   layers:
   - Default
   - TransparentFX

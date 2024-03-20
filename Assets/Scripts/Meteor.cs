@@ -55,6 +55,11 @@ public class Meteor : MonoBehaviour
         {
             collision.gameObject.GetComponent<BlockController>().takeDamage(1);
         }
+
+        if (collision.gameObject.CompareTag("Factory"))
+        {
+            collision.gameObject.GetComponent<BuildingController>().takeDamage(1);
+        }
         if (!collision.gameObject.CompareTag("Meteor"))
             Destroy(this.gameObject);
 

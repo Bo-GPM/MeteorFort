@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState
@@ -21,13 +22,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] buildingBlockList;
     
     [Header(" -- Factory Related -- ")] 
-    [SerializeField] private GameObject[] factoryPrefabs;
+    [SerializeField] private BuildingController[] factoryPrefabs;
 
     [Header(" -- UI Related -- ")] 
     [SerializeField] private Text GoldText;
+    [SerializeField] private GameObject gameOverPanel;
 
     [Header(" -- Meteor Related -- ")]
     [SerializeField] MeteorController[] meteorControllers;
+    [SerializeField] private float meteorsSettlingTime = 3f;
 
     private int activeBuidling;
     private bool isBuildingActive = false;
@@ -51,12 +54,18 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         meteorControllers = FindObjectsOfType<MeteorController>();
+        factoryPrefabs = FindObjectsOfType<BuildingController>();
+        gameOverPanel = GameObject.Find("GameOverPanel");
     }
+    
     // Start is called before the first frame update
     void Start()
     {
         gameState=GameState.playerbuilding;
         currentGold = initialGold;
+        
+        // Disable the game component
+        gameOverPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -82,6 +91,8 @@ public class GameManager : MonoBehaviour
             {
                 placeBlock();
             }
+            
+            
         }
     }
     public IEnumerator SwitchStateAfterDelay(GameState nextState,float delayTime)
@@ -91,6 +102,10 @@ public class GameManager : MonoBehaviour
 
         // 切换到指定的状态
         gameState = nextState;
+
+        // Wait few seconds for meteor settle down
+        StartCoroutine(FactorySettlement(meteorsSettlingTime));
+        
         foreach (MeteorController meteorController in meteorControllers)
         {
             meteorController.ClearNumCount();
@@ -100,6 +115,20 @@ public class GameManager : MonoBehaviour
             Debug.Log("Switched to " + nextState);
     }
 
+    public IEnumerator FactorySettlement(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        
+        // Add actions when game state is changing from rain back to building
+        if (gameState == GameState.playerbuilding)
+        {
+            foreach (BuildingController buildingController in factoryPrefabs)
+            {
+                buildingController.Settlement();
+            }
+        }
+    }
+    
     private void UpdateUI()
     {
         GoldText.text = new string($"Gold: {currentGold}");
@@ -169,6 +198,15 @@ public class GameManager : MonoBehaviour
             isBuildingActive = true;
         }
     }
-    
+
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     
 }
