@@ -34,9 +34,10 @@ public class GameManager : MonoBehaviour
 
     private int activeBuidling;
     private bool isBuildingActive = false;
-    private Vector2 mousePosition;
+    private Vector3 mousePosition;
     private GameObject tempBlock;
     private int currentGold;
+    private Camera mainCam;
     
     static public GameManager instance;
     public GameState gameState;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
         meteorControllers = FindObjectsOfType<MeteorController>();
         factoryPrefabs = FindObjectsOfType<BuildingController>();
         gameOverPanel = GameObject.Find("GameOverPanel");
+        mainCam = Camera.main;
     }
     
     // Start is called before the first frame update
@@ -135,7 +137,9 @@ public class GameManager : MonoBehaviour
     }
     private void updateMousePos()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Input.mousePosition;
+        mousePosition.z = 0 - mainCam.transform.position.z;
+        mousePosition = mainCam.ScreenToWorldPoint(mousePosition);
     }
 
     private void updateTempBlockPosAndRot()
@@ -166,7 +170,8 @@ public class GameManager : MonoBehaviour
             else
             {
                 currentGold -= tempBlock.GetComponent<BlockController>().getCost();
-                Instantiate(buildingBlockList[activeBuidling], mousePosition, tempBlock.transform.rotation);
+                Vector3 blockVec = new Vector3(mousePosition.x, mousePosition.y, 0);
+                Instantiate(buildingBlockList[activeBuidling], blockVec, tempBlock.transform.rotation);
                 Destroy(tempBlock);
                 isBuildingActive = false;
             }

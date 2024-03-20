@@ -66,12 +66,12 @@ public class CameraController : MonoBehaviour
 
         if (Input.mouseScrollDelta.y > 0)
         {
-            cameraSize += zoomStep;
+            cameraSize -= zoomStep;
 
         }
         if (Input.mouseScrollDelta.y < 0)
         {
-            cameraSize -= zoomStep;
+            cameraSize += zoomStep;
         }
         cameraSize = Mathf.Clamp(cameraSize, minSize, maxSize);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, cameraSize, 10 * Time.deltaTime);
