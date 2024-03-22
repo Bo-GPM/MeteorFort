@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3431887901337979482, guid: cb42caa4b15ebd64da7f470d7553da97, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431887901337979482, guid: cb42caa4b15ebd64da7f470d7553da97, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.96
+      objectReference: {fileID: 0}
     - target: {fileID: 3672061773230584274, guid: cb42caa4b15ebd64da7f470d7553da97, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -60,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4332981300782443790, guid: cb42caa4b15ebd64da7f470d7553da97, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 08247141eee2b994fae6c3e2cbda14e9, type: 3}
     - target: {fileID: 4332981300782443790, guid: cb42caa4b15ebd64da7f470d7553da97, type: 3}
       propertyPath: m_Color.b
       value: 1

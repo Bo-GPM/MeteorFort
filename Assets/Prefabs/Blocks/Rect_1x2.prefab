@@ -8,9 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1837589169521354590, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837589169521354590, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1837589169521354590, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 57e0bb8cb3e5a424f808d57c9d6d4e4a, type: 3}
+    - target: {fileID: 1837589169521354590, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +75,18 @@ PrefabInstance:
     - target: {fileID: 8911460982340843667, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
       propertyPath: m_Name
       value: Rect_1x2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016895150221776194, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016895150221776194, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016895150221776194, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

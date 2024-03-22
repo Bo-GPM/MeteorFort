@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0543b95101337e34daaf85ec962c244d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialGold: 300
+  initialGold: 1000
   playerRotateSpeed: 60
   forbitHeight: 8
   buildingBlockList:
@@ -288,6 +288,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 6206503510132314224}
   meteorControllers: []
   meteorsSettlingTime: 5
+  currentGold: 0
   gameState: 0
 --- !u!4 &256972578
 Transform:
@@ -1591,6 +1592,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 479765318443634181, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2117ad76536194b488c203a5584f29db, type: 3}
+    - target: {fileID: 479765318443634181, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722838985953359825, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722838985953359825, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.64
+      objectReference: {fileID: 0}
     - target: {fileID: 4841163825500111158, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1600,8 +1617,12 @@ PrefabInstance:
       value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
-      propertyPath: buildingType
-      value: 0
+      propertyPath: initialGoldOutput
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: goldOutputIncrement
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1832,6 +1853,10 @@ PrefabInstance:
     - target: {fileID: 4040751709781292713, guid: 6f4fe70be226ba340bfc25b0a052020c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4040751709781292713, guid: 6f4fe70be226ba340bfc25b0a052020c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4590645056724546490, guid: 6f4fe70be226ba340bfc25b0a052020c, type: 3}
       propertyPath: m_Camera

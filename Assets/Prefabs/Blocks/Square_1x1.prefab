@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8476480074805844768, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8911460982340843667, guid: 9b8a2a0e7924d1d46865d66c02fc14ea, type: 3}
       propertyPath: m_Name
-      value: Original
+      value: Square_1x1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     private bool isBuildingActive = false;
     private Vector3 mousePosition;
     private GameObject tempBlock;
-    private int currentGold;
+    public int currentGold;
     private Camera mainCam;
     
     static public GameManager instance;
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        // DontDestroyOnLoad(gameObject);
         meteorControllers = FindObjectsOfType<MeteorController>();
         factoryPrefabs = FindObjectsOfType<BuildingController>();
         gameOverPanel = GameObject.Find("GameOverPanel");
