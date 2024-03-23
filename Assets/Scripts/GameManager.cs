@@ -4,6 +4,8 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -32,12 +34,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] MeteorController[] meteorControllers;
     [SerializeField] private float meteorsSettlingTime = 3f;
 
+    [Header(" -- Weather Related -- ")] 
+    [SerializeField] private float dayNightTransitionTime = 1.5f;
+    
     private int activeBuidling;
     private bool isBuildingActive = false;
     private Vector3 mousePosition;
     private GameObject tempBlock;
     public int currentGold;
     private Camera mainCam;
+    private Light2D globalLight;
+    private Volume postProcessingVolume;
     
     static public GameManager instance;
     public GameState gameState;
@@ -58,6 +65,8 @@ public class GameManager : MonoBehaviour
         factoryPrefabs = FindObjectsOfType<BuildingController>();
         gameOverPanel = GameObject.Find("GameOverPanel");
         mainCam = Camera.main;
+        globalLight = GameObject.Find("GlobalLight").GetComponent<Light2D>();
+        postProcessingVolume = GameObject.Find("PPVolume").GetComponent<Volume>();
     }
     
     // Start is called before the first frame update
@@ -105,8 +114,19 @@ public class GameManager : MonoBehaviour
         // 切换到指定的状态
         gameState = nextState;
 
-        // Wait few seconds for meteor settle down
-        StartCoroutine(FactorySettlement(meteorsSettlingTime));
+        
+        if (gameState == GameState.meteorfalling)
+        {
+            // Change light to dimmed state
+            StartCoroutine(ChangeLightIntensity(1f, 0.1f, dayNightTransitionTime));
+        }
+        else if (gameState == GameState.playerbuilding)
+        {
+            // Wait few seconds for meteor settle down
+            StartCoroutine(FactorySettlement(meteorsSettlingTime));
+            
+            
+        }
         
         foreach (MeteorController meteorController in meteorControllers)
         {
@@ -120,6 +140,9 @@ public class GameManager : MonoBehaviour
     public IEnumerator FactorySettlement(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
+        
+        // Change night to day
+        StartCoroutine(ChangeLightIntensity(0.1f, 1f, dayNightTransitionTime));
         
         // Add actions when game state is changing from rain back to building
         if (gameState == GameState.playerbuilding)
@@ -214,4 +237,24 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
+    IEnumerator ChangeLightIntensity(float startIntensity, float endIntensity, float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Calculate new intensity
+            float newIntensity = Mathf.Lerp(startIntensity, endIntensity, elapsedTime / duration);
+            globalLight.intensity = newIntensity;
+            postProcessingVolume.weight = 1 - newIntensity;
+
+            // Increment elapsed time
+            elapsedTime += Time.deltaTime;
+            yield return null; 
+        }
+
+        // Ensure the final intensity is set
+        globalLight.intensity = endIntensity;
+        postProcessingVolume.weight = 1 - endIntensity;
+    }
 }

@@ -668,7 +668,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 1552900091193160653}
   HPBarPercentage: {fileID: 825913434715340845}
   currentLevelText: {fileID: 2174011192811430205}
-  initialHP: 10
+  initialHP: 20
   hpIncrementPerLevel: 5
   buildingType: 0
   initialUpgradeCost: 100
