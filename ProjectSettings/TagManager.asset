@@ -7,6 +7,7 @@ TagManager:
   - BuildingBlock
   - Meteor
   - Factory
+  - Bullets
   layers:
   - Default
   - TransparentFX

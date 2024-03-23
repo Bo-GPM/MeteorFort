@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float playerRotateSpeed = 10f;
     [SerializeField] private float forbitHeight = 8f;
     [SerializeField] private GameObject[] buildingBlockList;
+    [SerializeField] private GameObject[] hiddenBuildinngButtons;
     
     [Header(" -- Factory Related -- ")] 
     [SerializeField] private BuildingController[] factoryPrefabs;
@@ -67,6 +68,12 @@ public class GameManager : MonoBehaviour
         mainCam = Camera.main;
         globalLight = GameObject.Find("GlobalLight").GetComponent<Light2D>();
         postProcessingVolume = GameObject.Find("PPVolume").GetComponent<Volume>();
+        
+        // Hide all gameobjects in list
+        foreach (GameObject button in hiddenBuildinngButtons)
+        {
+            button.SetActive(false);
+        }
     }
     
     // Start is called before the first frame update
@@ -124,7 +131,6 @@ public class GameManager : MonoBehaviour
         {
             // Wait few seconds for meteor settle down
             StartCoroutine(FactorySettlement(meteorsSettlingTime));
-            
             
         }
         
@@ -219,7 +225,7 @@ public class GameManager : MonoBehaviour
             // instantiate, disable rigidbody & collider
             tempBlock = Instantiate(buildingBlockList[blockIndex], mousePosition, quaternion.identity);
             tempBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            tempBlock.GetComponent<BoxCollider2D>().enabled = false;
+            DisableAllBoxColliders(tempBlock.transform);
             
             // Active building setup
             activeBuidling = blockIndex;
@@ -227,6 +233,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void DisableAllBoxColliders(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            // Attempt to get a BoxCollider2D component on the current child GameObject
+            BoxCollider2D collider = child.GetComponent<BoxCollider2D>();
+            if (collider != null)
+            {
+                collider.enabled = false; // Disable the collider if found
+            }
+
+            // Recursively disable colliders in all children
+            DisableAllBoxColliders(child);
+        }
+    }
+    
     public void GameOver()
     {
         gameOverPanel.SetActive(true);
@@ -236,7 +258,12 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+
+    public void UnlockBuildings(int hiddenObjectIndex)
+    {
+        hiddenBuildinngButtons[hiddenObjectIndex].SetActive(true);
+    }
+        
     IEnumerator ChangeLightIntensity(float startIntensity, float endIntensity, float duration)
     {
         float elapsedTime = 0f;

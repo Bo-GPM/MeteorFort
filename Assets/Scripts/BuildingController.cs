@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class BuildingController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class BuildingController : MonoBehaviour
     [SerializeField] private Text upgradeCostText;
     [SerializeField] private Image HPBarPercentage;
     [SerializeField] private Text currentLevelText;
+    [SerializeField] private GameObject bulletPrefab;
 
     [Header(" -- Parameters -- ")] 
     [SerializeField] private int initialHP = 10;
@@ -37,6 +39,11 @@ public class BuildingController : MonoBehaviour
     [SerializeField] private int initialGoldOutput = 0;
     [SerializeField] private int goldOutputIncrement = 2;
     [SerializeField] private int maxBuildingLevel = 5;
+
+    [Header(" -- Aux Parameters -- ")] 
+    [SerializeField] private float turretBulletsFiringRate = 4f;
+    [SerializeField] private float bulletSpeed = 5f;
+    [SerializeField] private float spreadAngle = 45f;
     
     [Header(" -- Hidden stats -- ")]
     private bool uiCanvasIsActive = false;
@@ -46,6 +53,9 @@ public class BuildingController : MonoBehaviour
     private int upgradeCost;
     private int buildingLevel = 0;
     private int goldOutputPerRound = 0;
+    private float nextShootTime = 0f;
+    
+    
     
     
     // Start is called before the first frame update
@@ -68,19 +78,56 @@ public class BuildingController : MonoBehaviour
                 // TODO: play destroy animation
                 break;
             case FactoryState.Normal:
-                // TODO: normal functionality
+                // Normal functionality when building is not destroyed
+                if (GameManager.instance.gameState == GameState.meteorfalling)
+                    NormalFunctionality();
                 
                 // if current HP <= 0, change to destroy state
                 if (currentHP <= 0)
                 {
                     _factoryState = FactoryState.Destoryed;
                     // StartCoroutine(PlayOnDestroyAnimation());
-
+                    
                 }
                 break;
         }
     }
 
+    private void NormalFunctionality()
+    {
+        switch (_buildingType)
+        {
+            case BuildingType.Turret:
+                // Shoot bullets intercept meteor
+                if (Time.time >= nextShootTime)
+                {
+                    ShootBullet();
+                    nextShootTime = Time.time + 1f / turretBulletsFiringRate / buildingLevel;
+                }
+                break;
+            case BuildingType.Shield:
+                // check if shield is broken and close it
+                // Or not
+                break;
+        }
+    }
+    
+    private void ShootBullet()
+    {
+        // Calculate a random angle within the spread
+        float angle = Random.Range(-spreadAngle / 2, spreadAngle / 2);
+        
+        // Calculate the bullet's direction based on the random angle
+        Vector2 shootDirection = Quaternion.Euler(0, 0, angle) * transform.up;
+        Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
+        
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + Vector3.up * 1.5f, bulletRotation);
+        
+        // Set the bullet's velocity
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.velocity = shootDirection * bulletSpeed;
+    }
+    
     private IEnumerator PlayOnDestroyAnimation()
     {
         yield return null;
@@ -121,6 +168,7 @@ public class BuildingController : MonoBehaviour
         
         currentHP = initialHP;
         bool isDestroyed = _factoryState == FactoryState.Destoryed;
+        _factoryState = FactoryState.Normal;
 
         if (!isDestroyed)
         {
@@ -132,7 +180,17 @@ public class BuildingController : MonoBehaviour
                     goldOutputIncrement = goldOutputIncrement * buildingLevel + initialGoldOutput;
                     GameManager.instance.currentGold += goldOutputIncrement;
                     break;
-                
+                case BuildingType.ResearchLab:
+                    // Nothing to do
+                    break;
+                case BuildingType.Farm:
+                    // Make Money after round is over
+                    goldOutputIncrement = goldOutputIncrement * buildingLevel + initialGoldOutput;
+                    GameManager.instance.currentGold += goldOutputIncrement;
+                    break;
+                case BuildingType.Shield:
+                    // Instantiate()
+                    break;
             }
         }
         else
@@ -162,6 +220,13 @@ public class BuildingController : MonoBehaviour
             upgradeCost += upgradeCostIncrement;
             goldOutputPerRound = initialGoldOutput + goldOutputIncrement * buildingLevel;
             initialHP += hpIncrementPerLevel;
+            switch (_buildingType)
+            {
+                case BuildingType.ResearchLab:
+                    // Unlock building
+                    GameManager.instance.UnlockBuildings(buildingLevel - 1);
+                    break;
+            }
         }
         
     }

@@ -668,6 +668,7 @@ MonoBehaviour:
   upgradeCostText: {fileID: 1552900091193160653}
   HPBarPercentage: {fileID: 825913434715340845}
   currentLevelText: {fileID: 2174011192811430205}
+  bulletPrefab: {fileID: 7499345872931954682, guid: 86e047541e795e141a564faf78eef09e, type: 3}
   initialHP: 20
   hpIncrementPerLevel: 5
   buildingType: 0
@@ -676,6 +677,9 @@ MonoBehaviour:
   initialGoldOutput: 50
   goldOutputIncrement: 30
   maxBuildingLevel: 5
+  turretBulletsFiringRate: 4
+  bulletSpeed: 5
+  spreadAngle: 45
 --- !u!1 &5851226912223169839
 GameObject:
   m_ObjectHideFlags: 0

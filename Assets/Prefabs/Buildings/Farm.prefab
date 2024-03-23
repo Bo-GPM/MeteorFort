@@ -28,6 +28,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Farm
       objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialHP
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: buildingType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: maxBuildingLevel
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialGoldOutput
+      value: 77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialUpgradeCost
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: goldOutputIncrement
+      value: 88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: hpIncrementPerLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: upgradeCostIncrement
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470391998232140352, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_Text
+      value: Farm have low HP but it can produce a lot money if survive the shower.
+      objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

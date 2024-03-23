@@ -24,9 +24,62 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1191171068304416602, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 92.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191171068304416602, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 57.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191171068304416602, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1191171068304416602, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 29.125
+      objectReference: {fileID: 0}
     - target: {fileID: 5325217484460004020, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_Name
       value: ReserachFacility
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialHP
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: buildingType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: maxBuildingLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialGoldOutput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialUpgradeCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: goldOutputIncrement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: hpIncrementPerLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: upgradeCostIncrement
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470391998232140352, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_Text
+      value: Upgrade Lab will unlock more brick option for sheltering meteor shower
+        :)
       objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x

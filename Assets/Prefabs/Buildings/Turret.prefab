@@ -28,6 +28,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialHP
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: bulletSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: buildingType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: maxBuildingLevel
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialGoldOutput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialUpgradeCost
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: goldOutputIncrement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: hpIncrementPerLevel
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: upgradeCostIncrement
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
