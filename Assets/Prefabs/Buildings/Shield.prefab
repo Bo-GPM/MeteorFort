@@ -28,6 +28,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialHP
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: buildingType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: maxBuildingLevel
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialGoldOutput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialUpgradeCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: goldOutputIncrement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: hpIncrementPerLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialShieldEnergy
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: upgradeCostIncrement
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: shieldIncrementPerLevel
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8470391998232140352, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: m_Text
+      value: It generate shield. Upgrading building can make shield endure more hits.
+      objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

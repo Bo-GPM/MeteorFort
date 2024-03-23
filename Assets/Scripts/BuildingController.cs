@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -29,6 +30,7 @@ public class BuildingController : MonoBehaviour
     [SerializeField] private Image HPBarPercentage;
     [SerializeField] private Text currentLevelText;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject shieldPrefab;
 
     [Header(" -- Parameters -- ")] 
     [SerializeField] private int initialHP = 10;
@@ -44,6 +46,8 @@ public class BuildingController : MonoBehaviour
     [SerializeField] private float turretBulletsFiringRate = 4f;
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private float spreadAngle = 45f;
+    [SerializeField] private int initialShieldEnergy = 100;
+    [SerializeField] private int shieldIncrementPerLevel = 30;
     
     [Header(" -- Hidden stats -- ")]
     private bool uiCanvasIsActive = false;
@@ -54,9 +58,7 @@ public class BuildingController : MonoBehaviour
     private int buildingLevel = 0;
     private int goldOutputPerRound = 0;
     private float nextShootTime = 0f;
-    
-    
-    
+    private GameObject currentShield;
     
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,10 @@ public class BuildingController : MonoBehaviour
         currentHP = initialHP;
         _buildingType = (BuildingType)buildingType;
         upgradeCost = initialUpgradeCost;
+        if (_buildingType == BuildingType.Shield)
+        {
+            currentShield = Instantiate(shieldPrefab, Vector3.zero, quaternion.identity);
+        }
         // Debug.Log(buildingType);
     }
 
@@ -99,10 +105,11 @@ public class BuildingController : MonoBehaviour
         {
             case BuildingType.Turret:
                 // Shoot bullets intercept meteor
+                Debug.Log("Time is:" + Time.time + "nextShootTime is:" + nextShootTime);
                 if (Time.time >= nextShootTime)
                 {
                     ShootBullet();
-                    nextShootTime = Time.time + 1f / turretBulletsFiringRate / buildingLevel;
+                    nextShootTime = Time.time + 1f / turretBulletsFiringRate / (1f + buildingLevel);
                 }
                 break;
             case BuildingType.Shield:
@@ -122,7 +129,7 @@ public class BuildingController : MonoBehaviour
         Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, shootDirection);
         
         GameObject bullet = Instantiate(bulletPrefab, transform.position + Vector3.up * 1.5f, bulletRotation);
-        
+        Debug.LogWarning("New Bullet generated");
         // Set the bullet's velocity
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = shootDirection * bulletSpeed;
@@ -140,7 +147,7 @@ public class BuildingController : MonoBehaviour
         // Update Upgrade text
         upgradeCostText.text = $"{upgradeCost}";
         currentLevelText.text = $"{buildingLevel}";
-
+        
     }
     
     private void OnMouseDown()
@@ -190,7 +197,14 @@ public class BuildingController : MonoBehaviour
                     GameManager.instance.currentGold += goldOutputIncrement;
                     break;
                 case BuildingType.Shield:
-                    // Instantiate()
+                    // Instantiate the shield and change the HP of it
+                    if (currentShield != null)
+                    {
+                        Destroy(currentShield);
+                    }
+                    currentShield = Instantiate(shieldPrefab, Vector3.zero, quaternion.identity);
+                    currentShield.GetComponent<BlockController>()
+                        .SetHP(initialShieldEnergy + shieldIncrementPerLevel * buildingLevel);
                     break;
             }
         }

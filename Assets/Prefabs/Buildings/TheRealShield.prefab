@@ -110,7 +110,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3631248639217242606}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 8701254870919609655}
   m_Layer: 0
   m_Name: TheRealShield
-  m_TagString: Untagged
+  m_TagString: BuildingBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5457a833d3cfa854ea66b5aa88ffd526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockHP: 100
+  blockHP: 35
   cost: 0
 --- !u!1 &4785860712698289927
 GameObject:
@@ -318,7 +318,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3489109115620383455}

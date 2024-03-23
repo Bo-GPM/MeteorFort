@@ -669,6 +669,7 @@ MonoBehaviour:
   HPBarPercentage: {fileID: 825913434715340845}
   currentLevelText: {fileID: 2174011192811430205}
   bulletPrefab: {fileID: 7499345872931954682, guid: 86e047541e795e141a564faf78eef09e, type: 3}
+  shieldPrefab: {fileID: 4128200149967265446, guid: af8f8cca913598c48b13228a4e882a4a, type: 3}
   initialHP: 20
   hpIncrementPerLevel: 5
   buildingType: 0
@@ -680,6 +681,8 @@ MonoBehaviour:
   turretBulletsFiringRate: 4
   bulletSpeed: 5
   spreadAngle: 45
+  initialShieldEnergy: 100
+  shieldIncrementPerLevel: 30
 --- !u!1 &5851226912223169839
 GameObject:
   m_ObjectHideFlags: 0

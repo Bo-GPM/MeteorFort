@@ -29,4 +29,9 @@ public class BlockController : MonoBehaviour
     {
         return cost;
     }
+
+    public void SetHP(int tempHp)
+    {
+        blockHP = tempHp;
+    }
 }

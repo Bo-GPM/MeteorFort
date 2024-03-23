@@ -28,6 +28,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainTown
       objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: initialHP
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
+      propertyPath: hpIncrementPerLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 9150948527237936342, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

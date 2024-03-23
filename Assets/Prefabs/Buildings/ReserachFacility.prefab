@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: initialHP
-      value: 12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: buildingType
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: hpIncrementPerLevel
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6214788161238274802, guid: 9f7bba590db44bf46abf12b034e929d5, type: 3}
       propertyPath: upgradeCostIncrement
