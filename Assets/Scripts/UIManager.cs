@@ -69,6 +69,8 @@ public class UIManager : MonoBehaviour
     {
         if (canClick)
         {
+            AudioManager.audioInstance.PlayAudio(14);
+            //(AudioManager.audioInstance.PlayAudioAfterDelay(0, 0.6f));
             Debug.Log(GameManager.instance.gameState);
             canClick = false;
             switch (GameManager.instance.gameState)

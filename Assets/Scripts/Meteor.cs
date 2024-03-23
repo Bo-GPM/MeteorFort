@@ -54,11 +54,13 @@ public class Meteor : MonoBehaviour
         if (collision.gameObject.CompareTag("BuildingBlock"))
         {
             collision.gameObject.GetComponent<BlockController>().takeDamage(1);
+            AudioManager.audioInstance.PlayAudio(Random.Range(1,7));
         }
 
         if (collision.gameObject.CompareTag("Factory"))
         {
             collision.gameObject.GetComponent<BuildingController>().takeDamage(1);
+            AudioManager.audioInstance.PlayAudio(Random.Range(1, 7));
         }
         if (!collision.gameObject.CompareTag("Meteor"))
             Destroy(this.gameObject);

@@ -126,12 +126,14 @@ public class GameManager : MonoBehaviour
         {
             // Change light to dimmed state
             StartCoroutine(ChangeLightIntensity(1f, 0.1f, dayNightTransitionTime));
+            AudioManager.audioInstance.PlayAudio(0);
         }
         else if (gameState == GameState.playerbuilding)
         {
             // Wait few seconds for meteor settle down
             StartCoroutine(FactorySettlement(meteorsSettlingTime));
-            
+          
+
         }
         
         foreach (MeteorController meteorController in meteorControllers)
@@ -149,7 +151,7 @@ public class GameManager : MonoBehaviour
         
         // Change night to day
         StartCoroutine(ChangeLightIntensity(0.1f, 1f, dayNightTransitionTime));
-        
+        AudioManager.audioInstance.PlayAudio(15);
         // Add actions when game state is changing from rain back to building
         if (gameState == GameState.playerbuilding)
         {
@@ -193,11 +195,13 @@ public class GameManager : MonoBehaviour
         {
             if (mousePosition.y < forbitHeight)
             {
+                AudioManager.audioInstance.PlayAudio(9);
                 // TODO: tell player this is too low to build
                 Debug.LogWarning("Building distance is too low");
             }
             else
             {
+                AudioManager.audioInstance.PlayAudio(10);
                 currentGold -= tempBlock.GetComponent<BlockController>().getCost();
                 Vector3 blockVec = new Vector3(mousePosition.x, mousePosition.y, 0);
                 Instantiate(buildingBlockList[activeBuidling], blockVec, tempBlock.transform.rotation);
@@ -217,14 +221,17 @@ public class GameManager : MonoBehaviour
         // Check gold first
         if (buildingBlockList[blockIndex].GetComponent<BlockController>().getCost() >= currentGold) 
         {
+            AudioManager.audioInstance.PlayAudio(9);
             // TODO: tell player they have insufficient funds
             Debug.LogWarning("Insufficient Funds!");
         }
         else
         {
+            AudioManager.audioInstance.PlayAudio(8);
             // instantiate, disable rigidbody & collider
             tempBlock = Instantiate(buildingBlockList[blockIndex], mousePosition, quaternion.identity);
             tempBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
             DisableAllBoxColliders(tempBlock.transform);
             
             // Active building setup
@@ -256,6 +263,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        AudioManager.audioInstance.PlayAudio(12);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

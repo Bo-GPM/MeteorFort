@@ -146,6 +146,7 @@ public class BuildingController : MonoBehaviour
     private void OnMouseDown()
     {
         uiCanvasIsActive = !uiCanvasIsActive;
+        AudioManager.audioInstance.PlayAudio(11);
         uiCanvas.SetActive(uiCanvasIsActive);
     }
 
@@ -210,12 +211,15 @@ public class BuildingController : MonoBehaviour
         // Check if gold is enough
         if (GameManager.instance.currentGold <= upgradeCost || buildingLevel >= maxBuildingLevel)
         {
+            AudioManager.audioInstance.PlayAudio(9);
             // TODO: tell player u need more money
             Debug.LogError("Insufficient money or max building level reached");
         }
         else
         {
+
             GameManager.instance.currentGold -= upgradeCost;
+            AudioManager.audioInstance.PlayAudio(13);
             buildingLevel++;
             upgradeCost += upgradeCostIncrement;
             goldOutputPerRound = initialGoldOutput + goldOutputIncrement * buildingLevel;
